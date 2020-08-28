@@ -2,13 +2,14 @@ const themes = {
   light: {
     primaryWhite: '#FFFFFF',
     primaryWhiteRGB: '255, 255, 255',
+    backgroundBlue: '#F3FCFF',
     primaryLightBlue: '#7DB5F2',
     primaryBlue: '#68A0F3',
     primaryRed: '#F55464',
     primaryYellow: '#F7C500',
     primaryYellow: '#F7C500',
     primaryPurple: '#2F2E63',
-    primaryDarkPurple: '#7CB2F0',
+    primaryDarkPurple: '#110E3C',
 
     fontSizeSmaller: 8,
     fontSizeSmall: 12,
@@ -21,14 +22,14 @@ const themes = {
   dark: {
     primaryWhite: '#FFFFFF',
     primaryWhiteRGB: '255, 255, 255',
-    primaryGrey: '#d3d3d3',
-    primaryOrange: '#413C69',
-    primaryRed: '#c81912',
-    primaryBrown: '#42240c',
-    primaryBeige: '#fdba9a',
-
-    orangeDarker: '#161422',
-    orangeShadow: '#161422',
+    backgroundBlue: '#F3FCFF',
+    primaryLightBlue: '#7DB5F2',
+    primaryBlue: '#68A0F3',
+    primaryRed: '#F55464',
+    primaryYellow: '#F7C500',
+    primaryYellow: '#F7C500',
+    primaryPurple: '#2F2E63',
+    primaryDarkPurple: '#110E3C',
 
     fontSizeSmaller: 8,
     fontSizeSmall: 12,

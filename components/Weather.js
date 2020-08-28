@@ -1,20 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const LayoutContainer = styled.div`
-  width: 100%;
-  height: 100vh;
-  background-color: ${props => props.theme.orangeDarker};
+import WeatherLeftSide from './WeatherLeftSide';
+import WeatherRightSide from './WeatherRightSide';
+
+const WeatherContainer = styled.div`
+  width: 80%;
+  height: 80vh;
+  background-color: ${props => props.theme.backgroundBlue};
+  border-radius: 20px;
+  display: flex;
 `;
 
-const Layout = (props) => {
-  const { children } = props;
-
+const Weather = () => {
   return(
-    <LayoutContainer>
-      {children}
-    </LayoutContainer>
+    <WeatherContainer>
+      <WeatherLeftSide />
+      <WeatherRightSide />
+    </WeatherContainer>
   );
 };
 
-export default Layout;
+export default Weather;
