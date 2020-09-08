@@ -10,6 +10,7 @@ const themes = {
     primaryYellow: '#F7C500',
     primaryPurple: '#2F2E63',
     primaryDarkPurple: '#110E3C',
+    primaryGreyPurple: '#b5aabb',
 
     fontSizeSmaller: 8,
     fontSizeSmall: 12,

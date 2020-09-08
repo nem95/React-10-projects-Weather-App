@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import SearchCity from './SearchCity';
+import FavoritesCities from './FavoritesCities';
+
 const LeftSideContainer = styled.div`
   width: 60%;
   height: 100%;
@@ -11,7 +14,9 @@ const LeftSideContainer = styled.div`
 const WeatherLeftSide = () => {
   return(
     <LeftSideContainer>
-      aaa
+      <SearchCity></SearchCity>
+
+      <FavoritesCities />
     </LeftSideContainer>
   );
 };
