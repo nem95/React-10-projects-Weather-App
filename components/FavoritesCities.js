@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import SearchCity from './SearchCity';
-
 const CitiesContainer = styled.div`
   width: 100%;
   height: auto;
@@ -21,7 +19,8 @@ const City = styled.div`
   min-height: 180px;
   height: auto;
   border-radius: 20px;
-  border: 1px solid red;
+  font-size: ${props => props.theme.fontSizeSmall}px;
+  text-align: center;
 
   &:first-child {
     min-height: 200px;
@@ -33,43 +32,35 @@ const CityImg = styled.img`
   width: 100%;
   height: 180px;
   border-radius: 20px;
+  filter: contrast(125%);
+
+  ${props => props.isFirst && `
+    height: 200px;
+  `}
 `;
 
 const AddCity = styled.div`
   width: 20%;
   height: 180px;
   border-radius: 20px;
-  border: 1px solid red;
-
-  &:first-child {
-    height: 200px;
-  }
+  border: 1px solid ${props => props.theme.primaryDarkPurple};
+  color: ${props => props.theme.primaryDarkPurple};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
 `;
 
-const FavoritesCities = () => {
-  const url = "https://api.teleport.org/api/urban_areas/slug:new-york/images/"
-  const cities = [
-    {
-      name: 'berlin',
-      country: 'Allemagne'
-    },
-    {
-      name: 'Paris',
-      country: 'France'
-    },
-    {
-      name: 'New York',
-      country: 'USA'
-    },
-  ];
+const FavoritesCities = (props) => {
+  const { cities } = props;
 
   return(
     <CitiesContainer>
       <CitiesWrapper>
         {cities.map((city, i) => (
-          <City>
-            <CityImg src="https://via.placeholder.com/200.png?" />
-            {city.name} {city.country}
+          <City key={i.toString()} >
+            <CityImg src={city.imgUrl && city.imgUrl} isFirst={i === 0 ? true : false} />
+            {city.name}, {city.country}
           </City>
         ))}
 
