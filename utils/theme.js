@@ -4,6 +4,7 @@ const themes = {
     primaryWhiteRGB: '255, 255, 255',
     backgroundBlue: '#F3FCFF',
     primaryLightBlue: '#7DB5F2',
+    // D0E4F8
     primaryBlue: '#68A0F3',
     primaryRed: '#F55464',
     primaryYellow: '#F7C500',
@@ -11,6 +12,9 @@ const themes = {
     primaryPurple: '#2F2E63',
     primaryDarkPurple: '#110E3C',
     primaryGreyPurple: '#b5aabb',
+    primaryGrey: '#BAC4D4',
+
+
 
     fontSizeSmaller: 8,
     fontSizeSmall: 12,

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import SearchCity from './SearchCity';
 import FavoritesCities from './FavoritesCities';
+import Forecasts from './Forecasts';
 
 const LeftSideContainer = styled.div`
   width: 70%;
@@ -12,6 +13,7 @@ const LeftSideContainer = styled.div`
 `;
 
 const WeatherLeftSide = () => {
+  const [forecasts, setForecasts] = useState(null);
   const [cities, setCities] = useState([
     {
       name: 'Berlin',
@@ -25,7 +27,7 @@ const WeatherLeftSide = () => {
       name: 'New York',
       country: 'USA',
     },
-  ])
+  ]);
 
   async function getImageUrl (city) {
     const url = `https://api.teleport.org/api/urban_areas/slug:${city.replace(' ', '-').toLowerCase()}/images/`;
@@ -38,7 +40,22 @@ const WeatherLeftSide = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  async function getForecasts (lat = 48.85341, lon = 2.3488) {
+    if (!process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY) return null;
+
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      return setForecasts(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(
     () => {
@@ -54,9 +71,13 @@ const WeatherLeftSide = () => {
         setCities(updatedCities);
       }
 
+      if (!forecasts) {
+        getForecasts();
+      }
+
       return () => {};
     },
-    [cities],
+    [cities, forecasts],
   );
 
   return(
@@ -64,6 +85,8 @@ const WeatherLeftSide = () => {
       <SearchCity></SearchCity>
 
       <FavoritesCities cities={cities} />
+
+      <Forecasts forecasts={forecasts}/>
     </LeftSideContainer>
   );
 };
