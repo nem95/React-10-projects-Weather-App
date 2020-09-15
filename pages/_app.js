@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import { Provider } from 'react-redux';
+import store from '../utils/store';
 
 import { ThemeContext, theme } from '../context/theme-context';
 import '../public/style.css';
@@ -15,17 +17,19 @@ function MyApp({ Component, pageProps }) {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme: themeState, toggleTheme }}>
-      <ThemeContext.Consumer>
-        {({ theme, toggleTheme }) => (
-          <ThemeProvider theme={theme}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
-        )}
-      </ThemeContext.Consumer>
-    </ThemeContext.Provider>
+    <Provider store={store}>
+      <ThemeContext.Provider value={{ theme: themeState, toggleTheme }}>
+        <ThemeContext.Consumer>
+          {({ theme, toggleTheme }) => (
+            <ThemeProvider theme={theme}>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ThemeProvider>
+          )}
+        </ThemeContext.Consumer>
+      </ThemeContext.Provider>
+    </Provider>
   )
 }
 

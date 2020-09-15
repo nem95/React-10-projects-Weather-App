@@ -1,6 +1,50 @@
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
+
+import { selectWeather } from '../reducers/weatherSlice';
+
+const Forecasts = () => {
+  const forecasts = useSelector(selectWeather);
+
+  return(
+    <ForecastContainer>
+      <FiltersWrapper>
+        <Filter isActive={true}>Day</Filter>
+        <Filter>Week</Filter>
+      </FiltersWrapper>
+
+      <ForecastsWrapper>
+        {forecasts && forecasts.daily.map((forecast, i) => {
+          const { dt, humidity, weather, temp } = forecast;
+
+          return (
+            <Forecast>
+              <div>{moment.unix(dt).format("dddd")}</div>
+              <div>{humidity}%</div>
+
+              <ForecastImg src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`} />
+
+              <div>{Math.round(temp.min)}°C</div>
+
+              <TempProgressBar>
+                <ProgressBarWrapper>
+                  <ProgressBar temp="cold" minTemp={temp.min} />
+                </ProgressBarWrapper>
+                <ProgressBarWrapper>
+                  <ProgressBar temp="hot" maxTemp={temp.max} />
+                </ProgressBarWrapper>
+              </TempProgressBar>
+
+              <div>{Math.round(temp.max)}°C</div>
+            </Forecast>
+          );
+        })}
+      </ForecastsWrapper>
+    </ForecastContainer>
+  );
+};
 
 const ForecastContainer = styled.div`
   width: 100%;
@@ -74,7 +118,6 @@ const Forecast = styled.div`
   }
 `;
 
-
 const ForecastImg = styled.img`
   width: 40px;
   height: 40px;
@@ -130,46 +173,5 @@ const ProgressBar = styled.div`
     left: 0;
   `}
 `;
-
-const Forecasts = (props) => {
-  const { forecasts } = props;
-
-  return(
-    <ForecastContainer>
-      <FiltersWrapper>
-        <Filter isActive={true}>Day</Filter>
-        <Filter>Week</Filter>
-      </FiltersWrapper>
-
-      <ForecastsWrapper>
-        {forecasts && forecasts.daily.map((forecast, i) => {
-          const { dt, humidity, weather, temp } = forecast;
-
-          return (
-            <Forecast>
-              <div>{moment.unix(dt).format("dddd")}</div>
-              <div>{humidity}%</div>
-
-              <ForecastImg src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`} />
-
-              <div>{Math.round(temp.min)}°C</div>
-
-              <TempProgressBar>
-                <ProgressBarWrapper>
-                  <ProgressBar temp="cold" minTemp={temp.min} />
-                </ProgressBarWrapper>
-                <ProgressBarWrapper>
-                  <ProgressBar temp="hot" maxTemp={temp.max} />
-                </ProgressBarWrapper>
-              </TempProgressBar>
-
-              <div>{Math.round(temp.max)}°C</div>
-            </Forecast>
-          );
-        })}
-      </ForecastsWrapper>
-    </ForecastContainer>
-  );
-};
 
 export default Forecasts;
