@@ -14,8 +14,6 @@ const themes = {
     primaryGreyPurple: '#b5aabb',
     primaryGrey: '#BAC4D4',
 
-
-
     fontSizeSmaller: 8,
     fontSizeSmall: 12,
     fontSizeMedium: 14,
