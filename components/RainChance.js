@@ -21,10 +21,10 @@ const RainChance = () => {
         </RainLevelWrapper>
 
         <RainLevelGraph>
-          {[...Array(6).keys()].map((item, i) => (
+          {forecasts && forecasts.hourly.slice(0, 6).map((item, i) => (
             <RainLevelGraphItem>
               <RainLevelGraphItemLevel>
-                <ProgressBar isCurrent="false" pop={i * 10} />
+                <ProgressBar isCurrent="false" pop={item.pop * 100} />
               </RainLevelGraphItemLevel>
               <RainLevelGraphItemTime>10AM</RainLevelGraphItemTime>
             </RainLevelGraphItem>
@@ -91,9 +91,9 @@ const RainLevelGraphItemLevel = styled.div`
     position: absolute;
     width: 1px;
     height: 100%;
-    background-color: ${props => props.theme.primaryGreyPurple};
+    /* background-color: ${props => props.theme.primaryGreyPurple}; */
     z-index: 0;
-  }
+    background-image: linear-gradient( 89deg,  rgba(243,156,0,1) 15.1%, rgba(255,249,26,1) 35.1%, rgba(61,195,255,1) 54.7%, rgba(61,247,255,1) 87.5% );  }
 `;
 
 const ProgressBar = styled.div`
