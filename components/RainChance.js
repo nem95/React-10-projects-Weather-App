@@ -7,6 +7,7 @@ import { selectWeather } from '../reducers/weatherSlice';
 const RainChance = () => {
   const forecasts = useSelector(selectWeather);
 
+  console.log(forecasts);
   return(
     <RainChanceContainer>
       Chance of rain
@@ -14,14 +15,17 @@ const RainChance = () => {
 
       <RainChanceGraph>
         <RainLevelWrapper>
-          <div>sunny</div>
-          <div>rainy</div>
           <div>heavy rain</div>
+          <div>rainy</div>
+          <div>sunny</div>
         </RainLevelWrapper>
 
         <RainLevelGraph>
           {[...Array(6).keys()].map((item, i) => (
             <RainLevelGraphItem>
+              <RainLevelGraphItemLevel>
+                <ProgressBar isCurrent="false" pop={i * 10} />
+              </RainLevelGraphItemLevel>
               <RainLevelGraphItemTime>10AM</RainLevelGraphItemTime>
             </RainLevelGraphItem>
           ))}
@@ -39,14 +43,19 @@ const RainChanceContainer = styled.div`
 
 const RainChanceGraph = styled.div`
   width: 100%;
-  height: auto;
+  height: 245px;
   display: flex;
+  margin-top: 15px;
 `;
 
 const RainLevelWrapper = styled.div`
   flex: 1;
   width: 100%;
-  height: auto;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  flex-direction: flex-start;
+  justify-content: space-between;
 `;
 
 const RainLevelGraph = styled.div`
@@ -59,10 +68,45 @@ const RainLevelGraph = styled.div`
 const RainLevelGraphItem = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  height: 100%;
 `;
 
 const RainLevelGraphItemTime = styled.div`
+  height: 20%;
+  display: flex;
+  align-items: center;
+`;
 
+const RainLevelGraphItemLevel = styled.div`
+  height: 75%;
+  width: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background-color: ${props => props.theme.primaryGreyPurple};
+    z-index: 0;
+  }
+`;
+
+const ProgressBar = styled.div`
+  width: 100%;
+  border-radius: 4px;
+  z-index: 1;
+  margin: 0;
+
+  ${props => props.pop && `
+    bottom: 0;
+    height: ${props.pop}%;
+    background: ${props.theme.primaryLightBlue};
+  `}
 `;
 
 export default RainChance;
