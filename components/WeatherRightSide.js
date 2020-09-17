@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 
 import { selectWeather } from '../reducers/weatherSlice';
+import RainChance from './RainChance';
 
 const WeatherRightSide = () => {
   const forecasts = useSelector(selectWeather);
@@ -39,6 +40,8 @@ const WeatherRightSide = () => {
           <span>Sunset {moment.unix(forecasts.current.dt).format("HH:mm")}</span>
         </CurrentFeels>
       )}
+
+      <RainChance />
     </RightSideContainer>
   );
 };
@@ -46,7 +49,7 @@ const WeatherRightSide = () => {
 const RightSideContainer = styled.div`
   width: 30%;
   height: auto;
-  padding: 48px;
+  padding: 40px;
   background-color: ${props => props.theme.primaryDarkPurple};
   border-radius: 0 20px 20px 0;
 `;
@@ -125,7 +128,6 @@ const SeparationDot = styled.span`
   height: 5px;
   border-radius: 5px;
   background-color: ${props => props.theme.primaryGreyPurple};
-
 `;
 
 export default WeatherRightSide;
