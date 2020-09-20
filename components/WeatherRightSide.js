@@ -9,7 +9,6 @@ import RainChance from './RainChance';
 const WeatherRightSide = () => {
   const forecasts = useSelector(selectWeather);
 
-  console.log(forecasts);
   return(
     <RightSideContainer>
       <TodayWrapper>
@@ -50,6 +49,7 @@ const RightSideContainer = styled.div`
   width: 30%;
   height: auto;
   padding: 40px;
+  padding-top: 150px;
   background-color: ${props => props.theme.primaryDarkPurple};
   border-radius: 0 20px 20px 0;
 `;

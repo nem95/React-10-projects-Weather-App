@@ -1,10 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+
+import cities from '../utils/city.list.json';
+
+const SearchCity = () => {
+  const [citiesCompletion, setCitiesCompletion] = useState(null);
+
+  const handleInputChange = (e) => {
+    const searchText = e.target.value;
+
+    if (!searchText) return setCitiesCompletion(null);
+
+    const newCitiesArray = cities.filter(city => {
+      const { name } = city;
+
+      return name.toLowerCase()
+      .replace(/-/g,' ')
+      .includes(searchText.toLowerCase());
+    });
+
+    return setCitiesCompletion(newCitiesArray);
+  };
+
+  return(
+    <SearchCityContainer>
+      <InputWrapper>
+        <SearchIcon className="fa fa-search" aria-hidden="true" />
+
+        <SearchInput placeholder='Search a new place' onChange={(e) => handleInputChange(e)}/>
+      </InputWrapper>
+
+      {citiesCompletion && (
+        <SearchCompletion>
+          <SearchCompletionList>
+            {citiesCompletion.slice(0, 50).map((city, i) => (
+              <SearchCompletionListItem>
+                {city.name} / {city.country}
+              </SearchCompletionListItem>
+            ))}
+          </SearchCompletionList>
+        </SearchCompletion>
+      )}
+
+    </SearchCityContainer>
+  );
+};
 
 const SearchCityContainer = styled.div`
   width: 100%;
   height: 100px;
   border-radius: 20px;
+  position: relative;
 `;
 
 const InputWrapper = styled.div`
@@ -30,16 +76,36 @@ const SearchInput = styled.input`
   color: ${props => props.theme.primaryGreyPurple};
 `;
 
-const SearchCity = () => {
-  return(
-    <SearchCityContainer>
-      <InputWrapper>
-        <SearchIcon className="fa fa-search" aria-hidden="true" />
+const SearchCompletion = styled.div`
+  width: 50%;
+  height: auto;
+  max-height: 450px;
+  background-color: ${props => props.theme.primaryWhite};
+  position: absolute;
+  z-index: 99;
+  top: 70px;
+  overflow-y: scroll;
+`;
 
-        <SearchInput placeholder='Search a new place'></SearchInput>
-      </InputWrapper>
-    </SearchCityContainer>
-  );
-};
+const SearchCompletionList = styled.ul`
+  padding: 20px;
+`;
+
+const SearchCompletionListItem = styled.li`
+  height: 40px;
+  width: 100%;
+  background-color: ${props => props.theme.lightBlueGrey};
+  list-style: none;
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 0 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.theme.backgroundBlue};
+  }
+`;
 
 export default SearchCity;

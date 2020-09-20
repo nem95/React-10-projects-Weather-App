@@ -7,7 +7,6 @@ import { selectWeather } from '../reducers/weatherSlice';
 const RainChance = () => {
   const forecasts = useSelector(selectWeather);
 
-  console.log(forecasts);
   return(
     <RainChanceContainer>
       Chance of rain
@@ -21,14 +20,22 @@ const RainChance = () => {
         </RainLevelWrapper>
 
         <RainLevelGraph>
-          {forecasts && forecasts.hourly.slice(0, 6).map((item, i) => (
-            <RainLevelGraphItem>
-              <RainLevelGraphItemLevel>
-                <ProgressBar isCurrent="false" pop={item.pop * 100} />
-              </RainLevelGraphItemLevel>
-              <RainLevelGraphItemTime>10AM</RainLevelGraphItemTime>
-            </RainLevelGraphItem>
-          ))}
+          {forecasts && forecasts.hourly.slice(0, 6).map((item, i) => {
+            const date = new Date(item.dt * 1000);
+            const time = new Intl.DateTimeFormat('fr-FR', {
+              formatMatcher: 'best fit',
+              hour: '2-digit'
+            }).format(date);
+
+            return (
+              <RainLevelGraphItem key={i.toString()}>
+                <RainLevelGraphItemLevel>
+                  <ProgressBar isCurrent="false" pop={item.pop * 100} />
+                </RainLevelGraphItemLevel>
+                <RainLevelGraphItemTime>{time}</RainLevelGraphItemTime>
+              </RainLevelGraphItem>
+            );
+          })}
         </RainLevelGraph>
       </RainChanceGraph>
     </RainChanceContainer>
@@ -39,13 +46,14 @@ const RainChanceContainer = styled.div`
   width: 100%;
   height: auto;
   color: ${props => props.theme.primaryWhite};
+  margin-top: 50px;
 `;
 
 const RainChanceGraph = styled.div`
   width: 100%;
   height: 245px;
   display: flex;
-  margin-top: 15px;
+  margin-top: 30px;
 `;
 
 const RainLevelWrapper = styled.div`
