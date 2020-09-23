@@ -26,7 +26,7 @@ const SearchCity = () => {
       .replace(/-/g,' ')
       .includes(searchText.toLowerCase());
     });
-    console.log(newCitiesArray);
+
     return setCitiesCompletion(newCitiesArray);
   };
 
@@ -49,7 +49,7 @@ const SearchCity = () => {
         <SearchCompletion>
           <SearchCompletionList>
             {citiesCompletion.slice(0, 50).map((city, i) => (
-              <SearchCompletionListItem onClick={() => fetchNewForecats(city)}>
+              <SearchCompletionListItem onClick={() => fetchNewForecats(city)} key={i.toString()}>
                 {city.name} / {city.country}
               </SearchCompletionListItem>
             ))}
