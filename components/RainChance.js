@@ -106,7 +106,7 @@ const RainLevelGraphItemLevel = styled.div`
 
 const ProgressBar = styled.div`
   width: 100%;
-  border-radius: 4px;
+  border-radius: 15px;
   z-index: 1;
   margin: 0;
 
