@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import SearchCity from './SearchCity';
@@ -12,59 +11,12 @@ const LeftSideContainer = styled.div`
   border-radius: 20px;
 `;
 
-const WeatherLeftSide = (props) => {
-  const [cities, setCities] = useState([
-    {
-      name: 'Berlin',
-      country: 'Allemagne',
-    },
-    {
-      name: 'Paris',
-      country: 'France',
-    },
-    {
-      name: 'New York',
-      country: 'USA',
-    },
-  ]);
-
-  async function getImageUrl (city) {
-    const url = `https://api.teleport.org/api/urban_areas/slug:${city.replace(' ', '-').toLowerCase()}/images/`;
-
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-
-      return data.photos[0].image.mobile;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(
-    () => {
-      if(!cities[0].imgUrl) {
-        const updatedCities = cities.slice();
-
-        updatedCities.forEach(async (city, i) => {
-          const imgUrl = await getImageUrl(city.name);
-
-          updatedCities[i].imgUrl = imgUrl;
-        });
-
-        setCities(updatedCities);
-      }
-
-      return () => {};
-    },
-    [cities],
-  );
-
+const WeatherLeftSide = () => {
   return(
     <LeftSideContainer>
-      <SearchCity></SearchCity>
+      <SearchCity />
 
-      <FavoritesCities cities={cities} />
+      <FavoritesCities />
 
       <Forecasts />
     </LeftSideContainer>

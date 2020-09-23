@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 
-import { selectWeather } from '../reducers/weatherSlice';
+import { selectWeather, selectCity } from '../reducers/weatherSlice';
 import RainChance from './RainChance';
 
 const WeatherRightSide = () => {
   const forecasts = useSelector(selectWeather);
+  const city = useSelector(selectCity);
 
   return(
     <RightSideContainer>
@@ -29,14 +30,14 @@ const WeatherRightSide = () => {
       </CurrentTempWrapper>
 
       <CurrentCity>
-        Paris, France
+        {city.name}, {city.country || city.country}
       </CurrentCity>
 
       {forecasts && (
         <CurrentFeels>
           <span>Feels like {Math.round(forecasts.current.feels_like)}</span>
           <SeparationDot />
-          <span>Sunset {moment.unix(forecasts.current.dt).format("HH:mm")}</span>
+          <span>Sunset {moment.unix(forecasts.current.sunset).format("HH:mm")}</span>
         </CurrentFeels>
       )}
 

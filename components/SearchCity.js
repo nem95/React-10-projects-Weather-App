@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+
+import {
+  fetchCurrentCityForecasts,
+  fetchCurrentCityImage,
+} from '../reducers/weatherSlice';
 
 import cities from '../utils/city.list.json';
 
 const SearchCity = () => {
+  const dispatch = useDispatch();
   const [citiesCompletion, setCitiesCompletion] = useState(null);
 
   const handleInputChange = (e) => {
@@ -12,14 +19,22 @@ const SearchCity = () => {
     if (!searchText) return setCitiesCompletion(null);
 
     const newCitiesArray = cities.filter(city => {
+
       const { name } = city;
 
       return name.toLowerCase()
       .replace(/-/g,' ')
       .includes(searchText.toLowerCase());
     });
-
+    console.log(newCitiesArray);
     return setCitiesCompletion(newCitiesArray);
+  };
+
+  const fetchNewForecats = (city) => {
+    const { lat, lon } = city.coord;
+    dispatch(fetchCurrentCityForecasts(lat, lon));
+    dispatch(fetchCurrentCityImage(city))
+    setCitiesCompletion(null)
   };
 
   return(
@@ -34,7 +49,7 @@ const SearchCity = () => {
         <SearchCompletion>
           <SearchCompletionList>
             {citiesCompletion.slice(0, 50).map((city, i) => (
-              <SearchCompletionListItem>
+              <SearchCompletionListItem onClick={() => fetchNewForecats(city)}>
                 {city.name} / {city.country}
               </SearchCompletionListItem>
             ))}

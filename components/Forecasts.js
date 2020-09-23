@@ -11,8 +11,7 @@ const Forecasts = () => {
   return(
     <ForecastContainer>
       <FiltersWrapper>
-        <Filter isActive={true}>Day</Filter>
-        <Filter>Week</Filter>
+        <Filter isActive={true}>Week</Filter>
       </FiltersWrapper>
 
       <ForecastsWrapper>
@@ -20,7 +19,7 @@ const Forecasts = () => {
           const { dt, humidity, weather, temp } = forecast;
 
           return (
-            <Forecast>
+            <Forecast key={i.toString()}>
               <div>{moment.unix(dt).format("dddd")}</div>
               <div>{humidity}%</div>
 

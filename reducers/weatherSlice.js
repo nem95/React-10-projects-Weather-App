@@ -3,26 +3,44 @@ import { createSlice } from '@reduxjs/toolkit'
 export const weatherSlice = createSlice({
   name: 'weather',
   initialState: {
-    value: null
+    value: {
+      city: {
+        name: 'Paris',
+      },
+      weather: null,
+    },
   },
   reducers: {
+    updateCity: (state, action) => {
+      state.value.city = action.payload;
+    },
     updateWeather: (state, action) => {
-      state.value = action.payload;
+      state.value.weather = action.payload;
     },
   }
 })
 
-export const { updateWeather } = weatherSlice.actions
+export const { updateWeather, updateCity } = weatherSlice.actions
 
 export const fetchCurrentCityForecasts = (lat = 48.85341, lon = 2.3488) => {
   if (!process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY) return null;
 
   // the inside "thunk function"
   return async (dispatch, getState) => {
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY}`;
+    const options = {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: process.env.NEXT_PUBLIC_OPEN_PEXELS_API_KEY,
+      },
+    };
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&`;
 
     try {
-      const res = await fetch(url);
+      const res = await fetch(url + new URLSearchParams({
+        appid: process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY,
+      }));
       const data = await res.json();
 
       dispatch(updateWeather(data))
@@ -32,7 +50,38 @@ export const fetchCurrentCityForecasts = (lat = 48.85341, lon = 2.3488) => {
   }
 }
 
-export const selectWeather = state => state.weather.value;
+export const fetchCurrentCityImage = (city = { name: 'paris' }) => {
+  if (!process.env.NEXT_PUBLIC_OPEN_PEXELS_API_KEY) return null;
+
+  // the inside "thunk function"
+  return async (dispatch, getState) => {
+    const options = {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: process.env.NEXT_PUBLIC_OPEN_PEXELS_API_KEY,
+      },
+    };
+    const url = `https://api.pexels.com/v1/search?query=${city.name.toLowerCase()}&per_page=100`;
+
+    try {
+      const res = await fetch(url, options);
+      const data = await res.json();
+
+      console.log(getState);
+      if (data.photos.length > 0) {
+        const randomNum = Math.round(Math.random() * data.photos.length);
+        dispatch(updateCity({...city, photos: data.photos[randomNum]}))
+      }
+    } catch (err) {
+      // If something went wrong, handle it here
+    }
+  }
+}
+
+export const selectWeather = state => state.weather.value.weather;
+export const selectCity = state => state.weather.value.city;
 
 
 export default weatherSlice.reducer

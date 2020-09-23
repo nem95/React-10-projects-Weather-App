@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import {
   fetchCurrentCityForecasts,
+  fetchCurrentCityImage,
   selectWeather,
 } from '../reducers/weatherSlice';
 
@@ -31,6 +32,7 @@ const Weather = () => {
 
   if (!forecasts) {
     dispatch(fetchCurrentCityForecasts());
+    dispatch(fetchCurrentCityImage());
   }
 
   return(
