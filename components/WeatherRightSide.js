@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 
 import { selectWeather, selectCity } from '../reducers/weatherSlice';
+import FavoritesCities from './FavoritesCities';
 import RainChance from './RainChance';
+import SearchCity from './SearchCity';
 
 const WeatherRightSide = () => {
   const forecasts = useSelector(selectWeather);
@@ -12,6 +14,8 @@ const WeatherRightSide = () => {
 
   return(
     <RightSideContainer>
+      <SearchCity />
+
       <TodayWrapper>
         {forecasts && (
           <ForecastImg src={`https://openweathermap.org/img/wn/${forecasts.current.weather[0].icon}@2x.png`} />
@@ -41,18 +45,27 @@ const WeatherRightSide = () => {
         </CurrentFeels>
       )}
 
+      <FavoritesCities />
+
       <RainChance />
     </RightSideContainer>
   );
 };
 
 const RightSideContainer = styled.div`
-  width: 30%;
-  height: auto;
-  padding: 40px;
-  padding-top: 150px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  padding-top: 50px;
   background-color: ${props => props.theme.primaryDarkPurple};
-  border-radius: 0 20px 20px 0;
+
+  @media (min-width: 1440px) {
+    width: 30%;
+    height: 100%;
+    padding: 48px;
+    padding-top: 150px;
+    border-radius: 0 20px 20px 0;
+  }
 `;
 
 const TodayWrapper = styled.div`
@@ -61,6 +74,10 @@ const TodayWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin: auto;
+
+  @media (min-width: 1440px) {
+    height: 150px;
+  }
 `;
 
 const ForecastImg = styled.img`

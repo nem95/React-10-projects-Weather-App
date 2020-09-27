@@ -14,14 +14,17 @@ import WeatherRightSide from './WeatherRightSide';
 const WeatherContainer = styled.div`
   width: 95%;
   min-height: 80vh;
-  height: auto;
+  height: 100%;
   background-color: ${props => props.theme.backgroundBlue};
   border-radius: 20px;
   display: flex;
+  flex-direction: column-reverse;
   align-items: stretch;
+  justify-content: flex-start;
 
   @media (min-width: 1440px) {
     width: 85%;
+    flex-direction: row;
   }
 
 `;

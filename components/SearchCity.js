@@ -42,7 +42,11 @@ const SearchCity = () => {
       <InputWrapper>
         <SearchIcon className="fa fa-search" aria-hidden="true" />
 
-        <SearchInput placeholder='Search a new place' onChange={(e) => handleInputChange(e)}/>
+        <SearchInput
+          placeholder='Search a new place'
+          onChange={(e) => handleInputChange(e)}
+          hasCitiesCompletion={citiesCompletion}
+        />
       </InputWrapper>
 
       {citiesCompletion && (
@@ -72,8 +76,13 @@ const InputWrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  width: 50%;
-  height: 70px;
+  width: 100%;
+  height: 50px;
+
+  @media (min-width: 1440px) {
+    width: 50%;
+    height: 70px;
+  }
 `;
 
 const SearchIcon = styled.i`
@@ -89,17 +98,29 @@ const SearchInput = styled.input`
   border: none;
   padding: 0 50px;
   color: ${props => props.theme.primaryGreyPurple};
+
+  ${props => props.hasCitiesCompletion && `
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  `
+  }
 `;
 
 const SearchCompletion = styled.div`
-  width: 50%;
+  width: 100%;
   height: auto;
   max-height: 450px;
+  top: 50px;
   background-color: ${props => props.theme.primaryWhite};
   position: absolute;
   z-index: 99;
-  top: 70px;
   overflow-y: scroll;
+
+  @media (min-width: 1440px) {
+    width: 50%;
+    height: 70px;
+    top: 70px;
+  }
 `;
 
 const SearchCompletionList = styled.ul`
