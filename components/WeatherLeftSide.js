@@ -18,10 +18,21 @@ const LeftSideContainer = styled.div`
   }
 `;
 
+const SearchCityWrapper = styled.div`
+  display: none;
+
+  @media (min-width: 1440px) {
+    display: block;
+    width: 100%;
+  }
+`;
+
 const WeatherLeftSide = () => {
   return(
     <LeftSideContainer>
-      <SearchCity />
+      <SearchCityWrapper>
+        <SearchCity />
+      </SearchCityWrapper>
 
       <FavoritesCities />
 

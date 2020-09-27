@@ -14,7 +14,9 @@ const WeatherRightSide = () => {
 
   return(
     <RightSideContainer>
-      <SearchCity />
+      <SearchCityWrapper>
+        <SearchCity />
+      </SearchCityWrapper>
 
       <TodayWrapper>
         {forecasts && (
@@ -45,12 +47,19 @@ const WeatherRightSide = () => {
         </CurrentFeels>
       )}
 
-      <FavoritesCities />
-
       <RainChance />
     </RightSideContainer>
   );
 };
+
+const SearchCityWrapper = styled.div`
+  display: block;
+  width: 100%;
+
+  @media (min-width: 1440px) {
+    display: none;
+  }
+`;
 
 const RightSideContainer = styled.div`
   width: 100%;
