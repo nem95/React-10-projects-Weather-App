@@ -7,11 +7,6 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props => props.theme.backgroundBlue};
-
-  @media (min-width: 1440px) {
-    height: 100vh;
-  }
 `;
 
 export default function Index() {
