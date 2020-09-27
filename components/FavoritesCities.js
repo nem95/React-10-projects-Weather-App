@@ -46,7 +46,7 @@ const CitiesContainer = styled.div`
 
 const CitiesWrapper = styled.div`
   width: 100%;
-  // height: 100%;
+  /* height: 100%; */
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -72,8 +72,10 @@ const CityImg = styled.img`
   width: 100%;
   height: auto;
   border-radius: 20px;
-  filter: contrast(125%);
-  transform: translateY(-25%);
+
+  @media (min-width: 1440px) {
+    transform: translateY(-25%);
+  }
 `;
 
 export default FavoritesCities;
