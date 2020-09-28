@@ -1,16 +1,37 @@
-import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import moment from 'moment';
 
 import { selectWeather, selectCity } from '../reducers/weatherSlice';
-import FavoritesCities from './FavoritesCities';
 import RainChance from './RainChance';
 import SearchCity from './SearchCity';
 
 const WeatherRightSide = () => {
   const forecasts = useSelector(selectWeather);
   const city = useSelector(selectCity);
+
+  const getTodayDate = () => {
+    const today = new Intl.DateTimeFormat('fr-FR', {
+      formatMatcher: 'best fit',
+      weekday: 'short',
+      day: 'numeric',
+      month: 'short',
+      timeZone: forecasts.timezone,
+    }).format(Date.now());
+
+    return today
+  }
+  const getSunseTime = () => {
+    const SunsetDate = new Date(forecasts.current.sunset * 1000)
+    const Sunset = new Intl.DateTimeFormat('fr-FR', {
+      formatMatcher: 'best fit',
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: forecasts.timezone,
+    }).format(SunsetDate);
+
+    return Sunset
+  }
+
 
   return(
     <RightSideContainer>
@@ -25,7 +46,7 @@ const WeatherRightSide = () => {
 
         <Today>
           <span>Today</span>
-          <Date> Sat, 3 Aug </Date>
+          <CurrentDate> {getTodayDate()} </CurrentDate>
         </Today>
       </TodayWrapper>
 
@@ -43,7 +64,7 @@ const WeatherRightSide = () => {
         <CurrentFeels>
           <span>Feels like {Math.round(forecasts.current.feels_like)}</span>
           <SeparationDot />
-          <span>Sunset {moment.unix(forecasts.current.sunset).format("HH:mm")}</span>
+          <span>Sunset {getSunseTime()}</span>
         </CurrentFeels>
       )}
 
@@ -105,7 +126,7 @@ const Today = styled.div`
   text-align: center;
 `;
 
-const Date = styled.span`
+const CurrentDate = styled.span`
   font-size: ${props => props.theme.fontSizeSmall}px;
   color: ${props => props.theme.primaryGreyPurple};
   text-align: left;
