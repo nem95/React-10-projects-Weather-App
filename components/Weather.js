@@ -33,10 +33,10 @@ const Weather = () => {
   const forecasts = useSelector(selectWeather);
   const dispatch = useDispatch();
 
-  // if (!forecasts) {
-  //   dispatch(fetchCurrentCityForecasts());
-  //   dispatch(fetchCurrentCityImage());
-  // }
+  if (!forecasts) {
+    dispatch(fetchCurrentCityForecasts());
+    dispatch(fetchCurrentCityImage());
+  }
 
   return(
     <WeatherContainer>
