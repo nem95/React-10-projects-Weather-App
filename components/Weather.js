@@ -26,7 +26,6 @@ const WeatherContainer = styled.div`
     width: 85%;
     flex-direction: row;
   }
-
 `;
 
 const Weather = () => {
