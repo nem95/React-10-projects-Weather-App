@@ -4,18 +4,6 @@ import { useSelector } from 'react-redux';
 
 import { selectCity } from '../reducers/weatherSlice';
 
-const AddCity = styled.div`
-  width: 20%;
-  height: 180px;
-  border-radius: 20px;
-  border: 1px solid ${props => props.theme.primaryDarkPurple};
-  color: ${props => props.theme.primaryDarkPurple};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-`;
-
 const FavoritesCities = (props) => {
   const city = useSelector(selectCity);
 
