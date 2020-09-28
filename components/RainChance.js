@@ -7,6 +7,16 @@ import { selectWeather } from '../reducers/weatherSlice';
 const RainChance = () => {
   const forecasts = useSelector(selectWeather);
 
+  const getItemDate = (item) => {
+    const date = new Date(item.dt * 1000);
+    const time = new Intl.DateTimeFormat('fr-FR', {
+      formatMatcher: 'best fit',
+      hour: '2-digit',
+      timeZone: forecasts.timezone,
+    }).format(date);
+
+    return time;
+  }
   return(
     <RainChanceContainer>
       Chance of rain
@@ -21,18 +31,13 @@ const RainChance = () => {
 
         <RainLevelGraph>
           {forecasts && forecasts.hourly.slice(0, 6).map((item, i) => {
-            const date = new Date(item.dt * 1000);
-            const time = new Intl.DateTimeFormat('fr-FR', {
-              formatMatcher: 'best fit',
-              hour: '2-digit'
-            }).format(date);
 
             return (
               <RainLevelGraphItem key={i.toString()}>
                 <RainLevelGraphItemLevel>
                   <ProgressBar isCurrent="false" pop={item.pop * 100} />
                 </RainLevelGraphItemLevel>
-                <RainLevelGraphItemTime>{time}</RainLevelGraphItemTime>
+                <RainLevelGraphItemTime>{getItemDate(item)}</RainLevelGraphItemTime>
               </RainLevelGraphItem>
             );
           })}
