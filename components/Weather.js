@@ -12,7 +12,7 @@ import WeatherLeftSide from './WeatherLeftSide';
 import WeatherRightSide from './WeatherRightSide';
 
 const WeatherContainer = styled.div`
-  width: 95%;
+  width: 100%;
   min-height: 80vh;
   height: auto;
   background-color: ${props => props.theme.backgroundBlue};

@@ -46,7 +46,7 @@ const WeatherRightSide = () => {
 
         <Today>
           <span>Today</span>
-          <CurrentDate> {getTodayDate()} </CurrentDate>
+          <CurrentDate> {forecasts && getTodayDate()} </CurrentDate>
         </Today>
       </TodayWrapper>
 
