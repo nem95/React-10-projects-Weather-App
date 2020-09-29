@@ -10,7 +10,7 @@ const LeftSideContainer = styled.div`
   padding: 20px;
   border-radius: 0;
 
-  @media (min-width: 1440px) {
+  @media (min-width:  1280px) {
     width: 70%;
     height: 100%;
     padding: 48px;
@@ -21,7 +21,7 @@ const LeftSideContainer = styled.div`
 const SearchCityWrapper = styled.div`
   display: none;
 
-  @media (min-width: 1440px) {
+  @media (min-width:  1280px) {
     display: block;
     width: 100%;
   }

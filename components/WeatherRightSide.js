@@ -77,7 +77,7 @@ const SearchCityWrapper = styled.div`
   display: block;
   width: 100%;
 
-  @media (min-width: 1440px) {
+  @media (min-width:  1280px) {
     display: none;
   }
 `;
@@ -89,7 +89,7 @@ const RightSideContainer = styled.div`
   padding-top: 50px;
   background-color: ${props => props.theme.primaryDarkPurple};
 
-  @media (min-width: 1440px) {
+  @media (min-width:  1280px) {
     width: 30%;
     height: auto;
     padding: 48px;
@@ -105,7 +105,7 @@ const TodayWrapper = styled.div`
   justify-content: center;
   margin: auto;
 
-  @media (min-width: 1440px) {
+  @media (min-width:  1280px) {
     height: 150px;
   }
 `;

@@ -6,7 +6,7 @@ const LayoutContainer = styled.div`
   height: auto;
   background-color: ${props => props.theme.primaryLightBlue};
 
-  @media (min-width: 1440px) {
+  @media (min-width:  1280px) {
     height: 100vh;
   }
 `;

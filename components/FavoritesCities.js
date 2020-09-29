@@ -61,7 +61,7 @@ const CityImg = styled.img`
   height: auto;
   border-radius: 20px;
 
-  @media (min-width: 1440px) {
+  @media (min-width:  1280px) {
     transform: translateY(-25%);
   }
 `;

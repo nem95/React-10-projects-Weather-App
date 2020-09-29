@@ -22,7 +22,7 @@ const WeatherContainer = styled.div`
   align-items: stretch;
   justify-content: flex-start;
 
-  @media (min-width: 1440px) {
+  @media (min-width:  1280px) {
     width: 85%;
     flex-direction: row;
   }

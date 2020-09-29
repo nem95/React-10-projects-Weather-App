@@ -79,7 +79,7 @@ const InputWrapper = styled.div`
   width: 100%;
   height: 50px;
 
-  @media (min-width: 1440px) {
+  @media (min-width:  1280px) {
     width: 50%;
     height: 70px;
   }
@@ -116,7 +116,7 @@ const SearchCompletion = styled.div`
   z-index: 99;
   overflow-y: scroll;
 
-  @media (min-width: 1440px) {
+  @media (min-width:  1280px) {
     width: 50%;
     height: 70px;
     top: 70px;
