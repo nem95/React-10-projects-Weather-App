@@ -91,7 +91,7 @@ const RightSideContainer = styled.div`
 
   @media (min-width: 1440px) {
     width: 30%;
-    height: 100%;
+    height: auto;
     padding: 48px;
     padding-top: 150px;
     border-radius: 0 20px 20px 0;
