@@ -21,12 +21,11 @@ const SearchCity = () => {
     if (!searchText) return setCitiesCompletion(null);
 
     const newCitiesArray = cities.filter(city => {
-
       const { name } = city;
 
       return name.toLowerCase()
-      .replace(/-/g,' ')
-      .includes(searchText.toLowerCase());
+        .replace(/-/g,' ')
+        .includes(searchText.toLowerCase());
     });
 
     return setCitiesCompletion(newCitiesArray);

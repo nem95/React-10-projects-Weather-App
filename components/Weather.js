@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -32,10 +32,18 @@ const Weather = () => {
   const forecasts = useSelector(selectWeather);
   const dispatch = useDispatch();
 
-  if (!forecasts) {
-    dispatch(fetchCurrentCityForecasts());
-    dispatch(fetchCurrentCityImage());
-  }
+  useEffect(() => {
+    async function loadData() {
+      await dispatch(fetchCurrentCityForecasts());
+      await dispatch(fetchCurrentCityImage());
+    }
+
+    if (!forecasts) {
+      loadData();
+    }
+  }, [dispatch])
+
+
 
   return(
     <WeatherContainer>
