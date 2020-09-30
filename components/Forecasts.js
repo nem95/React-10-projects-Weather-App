@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
@@ -8,6 +8,15 @@ import HumidityIcon from '../assets/img/humidity.svg';
 
 const Forecasts = () => {
   const forecasts = useSelector(selectWeather);
+  const [dayFormat, setDayFormat] = useState('dddd');
+
+  useEffect(() => {
+    ['load','resize'].forEach( evt => {
+      window.addEventListener(evt, () => {
+        setDayFormat(window.innerWidth >= 1240 ? "dddd" : "ddd");
+      });
+    });
+  });
 
   return(
     <ForecastContainer>
@@ -21,7 +30,7 @@ const Forecasts = () => {
 
           return (
             <Forecast key={i.toString()}>
-              <div>{moment.unix(dt).format(window.innerWidth >= 1240 ? "dddd" : "ddd")}</div>
+              <div>{moment.unix(dt).format(dayFormat)}</div>
               <HumidityWrapper>
                 <Icon src={HumidityIcon} />
 
@@ -69,8 +78,12 @@ const HumidityWrapper = styled.div`
 `;
 
 const Icon = styled.img`
-  max-height: 18px;
-  transform: rotate(15deg)
+  max-height: 15px;
+  transform: rotate(15deg);
+
+  @media (min-width:  1280px) {
+    max-height: 18px;
+  }
 `;
 
 const Filter = styled.li`
