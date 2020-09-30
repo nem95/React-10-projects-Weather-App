@@ -16,7 +16,6 @@ const WeatherContainer = styled.div`
   min-height: 80vh;
   height: auto;
   background-color: ${props => props.theme.backgroundBlue};
-  border-radius: 20px;
   display: flex;
   flex-direction: column-reverse;
   align-items: stretch;
@@ -25,6 +24,7 @@ const WeatherContainer = styled.div`
   @media (min-width:  1280px) {
     width: 85%;
     flex-direction: row;
+    border-radius: 20px;
   }
 `;
 

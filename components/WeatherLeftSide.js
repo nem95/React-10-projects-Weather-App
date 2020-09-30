@@ -7,7 +7,7 @@ import Forecasts from './Forecasts';
 const LeftSideContainer = styled.div`
   width: 100%;
   height: auto;
-  padding: 20px;
+  padding: 20px 10px;
   border-radius: 0;
 
   @media (min-width:  1280px) {

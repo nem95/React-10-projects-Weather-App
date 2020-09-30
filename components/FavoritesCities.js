@@ -33,11 +33,18 @@ const CitiesContainer = styled.div`
 `;
 
 const CitiesWrapper = styled.div`
-  width: 100%;
+  width: calc(100% + 40px);
+  margin-left: -20px;
   /* height: 100%; */
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+
+  @media (min-width:  1280px) {
+    width: 100%;
+    margin-left: 0;
+  }
+
 `;
 
 const City = styled.div`
@@ -46,7 +53,6 @@ const City = styled.div`
   height: auto;
   max-height: 200px;
   overflow: hidden;
-  border-radius: 20px;
   font-size: ${props => props.theme.fontSizeSmall}px;
   text-align: center;
 
@@ -54,12 +60,15 @@ const City = styled.div`
     min-height: 200px;
     height: auto;
   }
+
+  @media (min-width:  1280px) {
+    border-radius: 20px;
+  }
 `;
 
 const CityImg = styled.img`
   width: 100%;
   height: auto;
-  border-radius: 20px;
 
   @media (min-width:  1280px) {
     transform: translateY(-25%);
