@@ -32,7 +32,6 @@ class MyDocument extends Document {
     return (
       <Html lang="fr">
         <Head>
-          <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'/>
           <link rel="preconnect" href='https://api.pexels.com/v1/'/>
           <link rel="preconnect" href='https://api.openweathermap.org/'/>
         </Head>

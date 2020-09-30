@@ -4,6 +4,7 @@ import moment from 'moment';
 import { useSelector } from 'react-redux';
 
 import { selectWeather } from '../reducers/weatherSlice';
+import HumidityIcon from '../assets/img/humidity.svg';
 
 const Forecasts = () => {
   const forecasts = useSelector(selectWeather);
@@ -21,7 +22,11 @@ const Forecasts = () => {
           return (
             <Forecast key={i.toString()}>
               <div>{moment.unix(dt).format("dddd")}</div>
-              <div>{humidity}%</div>
+              <HumidityWrapper>
+                <Icon src={HumidityIcon} />
+
+                {humidity}%
+              </HumidityWrapper>
 
               <ForecastImg src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`} />
 
@@ -56,6 +61,16 @@ const FiltersWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+`;
+
+const HumidityWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Icon = styled.img`
+  max-height: 18px;
+  transform: rotate(15deg)
 `;
 
 const Filter = styled.li`

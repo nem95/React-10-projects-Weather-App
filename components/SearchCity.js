@@ -7,6 +7,8 @@ import {
   fetchCurrentCityImage,
 } from '../reducers/weatherSlice';
 
+import Search from '../assets/img/search.svg';
+
 import cities from '../utils/city.list.json';
 
 const SearchCity = () => {
@@ -40,7 +42,7 @@ const SearchCity = () => {
   return(
     <SearchCityContainer>
       <InputWrapper>
-        <SearchIcon className="fa fa-search" aria-hidden="true" />
+        <SearchIcon src={Search} />
 
         <SearchInput
           placeholder='Search a new place'
@@ -85,10 +87,11 @@ const InputWrapper = styled.div`
   }
 `;
 
-const SearchIcon = styled.i`
+const SearchIcon = styled.img`
   position: absolute;
   z-index: 1;
   margin-left: 20px;
+  max-height: 15px;
 `;
 
 const SearchInput = styled.input`
@@ -102,8 +105,7 @@ const SearchInput = styled.input`
   ${props => props.hasCitiesCompletion && `
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-  `
-  }
+  `}
 `;
 
 const SearchCompletion = styled.div`
