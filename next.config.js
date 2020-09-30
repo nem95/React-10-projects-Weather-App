@@ -1,3 +1,5 @@
+const Uglify = require('uglifyjs-webpack-plugin');
+
 module.exports = {
   webpack(config) {
 
@@ -13,6 +15,12 @@ module.exports = {
       ],
     });
 
+    config.plugins = config.plugins.filter(
+      (plugin) => (plugin.constructor.name !== 'UglifyJsPlugin')
+    );
+    config.plugins.push(
+      new Uglify()
+    );
     return config;
   },
 }
