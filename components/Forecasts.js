@@ -21,7 +21,7 @@ const Forecasts = () => {
 
           return (
             <Forecast key={i.toString()}>
-              <div>{moment.unix(dt).format("dddd")}</div>
+              <div>{moment.unix(dt).format(window.innerWidth >= 1240 ? "dddd" : "ddd")}</div>
               <HumidityWrapper>
                 <Icon src={HumidityIcon} />
 
