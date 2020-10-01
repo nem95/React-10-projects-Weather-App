@@ -33,8 +33,8 @@ const CitiesContainer = styled.div`
 `;
 
 const CitiesWrapper = styled.div`
-  width: calc(100% + 40px);
-  margin-left: -20px;
+  width: calc(100% + 20px);
+  margin-left: -10px;
   /* height: 100%; */
   display: flex;
   align-items: flex-end;
