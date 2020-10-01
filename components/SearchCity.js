@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
@@ -9,16 +9,19 @@ import {
 
 import Search from '../assets/img/search.svg';
 
-import cities from '../utils/city.list.min.json';
+// import cities from '../utils/city.list.min.json';
 
 const SearchCity = () => {
   const dispatch = useDispatch();
   const [citiesCompletion, setCitiesCompletion] = useState(null);
+  const [cities, setCities] = useState(null);
+  const [loadCitiesTry, setLoadCitiesTry] = useState(0);
 
   const handleInputChange = (e) => {
     const searchText = e.target.value;
 
     if (!searchText) return setCitiesCompletion(null);
+    if (!cities) return;
 
     const newCitiesArray = cities.filter(city => {
       const { name } = city;
@@ -39,6 +42,19 @@ const SearchCity = () => {
     dispatch(fetchCurrentCityImage(city))
     setCitiesCompletion(null)
   };
+
+  useEffect(() => {
+    const getCities = async () => {
+      const loadCities = (await import('../utils/city.list.min.json')).default;
+      setCities(loadCities);
+    }
+
+    if (!cities && loadCitiesTry === 0) {
+      setLoadCitiesTry(1);
+      getCities();
+    }
+
+  }, [cities]);
 
   return(
     <SearchCityContainer>
