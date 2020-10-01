@@ -119,7 +119,6 @@ const SearchCompletion = styled.div`
 
   @media (min-width:  1280px) {
     width: 50%;
-    height: 70px;
     top: 70px;
   }
 `;
@@ -139,6 +138,7 @@ const SearchCompletionListItem = styled.li`
   border-radius: 10px;
   padding: 0 10px;
   cursor: pointer;
+  word-break: break-word;
 
   &:hover {
     background-color: ${props => props.theme.backgroundBlue};
