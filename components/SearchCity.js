@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import {
   fetchCurrentCityForecasts,
@@ -9,7 +9,7 @@ import {
 
 import Search from '../assets/img/search.svg';
 
-import cities from '../utils/city.list.json';
+import cities from '../utils/city.list.min.json';
 
 const SearchCity = () => {
   const dispatch = useDispatch();
@@ -22,10 +22,12 @@ const SearchCity = () => {
 
     const newCitiesArray = cities.filter(city => {
       const { name } = city;
-
-      return name.toLowerCase()
+      const startWithSearch = name
+        .toLowerCase()
         .replace(/-/g,' ')
-        .includes(searchText.toLowerCase());
+        .match(new RegExp(`^${searchText}`, 'g'));
+
+      return !!startWithSearch;
     });
 
     return setCitiesCompletion(newCitiesArray);
